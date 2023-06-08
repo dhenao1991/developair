@@ -1,4 +1,23 @@
+#destinations {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    margin: 0 auto;
+}
+
+li {
+    margin: auto 1rem;
+}
+
 img {
-    width: 20%;
-    height: fit-content;
+    width: 300px;
+    height: 300px;
+    object-fit:cover;
+    border-radius: 8px;
+}
+
+.city {
+    color: #52ab98;
+    font-weight: bold;
+    margin: 0.5rem auto;
 }
