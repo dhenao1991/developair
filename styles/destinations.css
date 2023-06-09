@@ -1,12 +1,15 @@
 #destinations {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /*display: flex;
+    flex-direction: column;*/
     align-items: top;
     margin: 0 auto;
 }
 
 li {
     margin: auto 1rem;
+
 }
 
 img {
@@ -20,4 +23,13 @@ img {
     color: #52ab98;
     font-weight: bold;
     margin: 0.5rem auto;
+}
+
+/*Media queries here for responsive design*/
+
+@media(max-width: 768px){  
+    #destinations {
+        display: flex;
+        flex-direction: column;
+    }
 }

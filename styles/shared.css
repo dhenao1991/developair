@@ -51,3 +51,15 @@ a:hover {
 ol,ul, li {
     list-style: none;
 }
+
+/*Media queries here for responsive design*/
+
+@media(max-width: 768px){  
+    nav {
+        display: none;
+    }
+
+    header {
+        padding:0
+    }
+}
