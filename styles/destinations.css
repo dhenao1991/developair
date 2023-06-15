@@ -20,7 +20,7 @@ img {
 }
 
 .city {
-    color: #52ab98;
+    color:var(--color-green);
     font-weight: bold;
     margin: 0.5rem auto;
 }
