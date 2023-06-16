@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/css-reset.css">
     <link href="/styles/shared.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
@@ -59,6 +60,33 @@
         </ol>
     </header>
     <main>
+        <form action="/" method="GET">
+            <div id="travel-info">
+                <section>
+                    <h3>Where are you going?</h3>
+                    <label for="origin">Origin</label>
+                    <input type="text" name="origin" id="origin">
+                    <label for="destination">Destination</label>
+                    <input type="text" name="destination" id="destination">
+                </section>
+                <section>
+                    <h3>When are you travelling?</h3>
+                    <label for="depart-date">Departing date</label>
+                    <input type="date" name="depart-date" id="depart-date">
+                    <label for="return-date">Returning date</label>
+                    <input type="date" name="return-date" id="return-date">
+                </section>
+                <section>How many people are going?
+                    <br><br>
+                        <label for="pax-number">Number of passengers</label>
+                        <input type="number" name="pax-number" id="pax-number">
+                </section>
+            </div>
+            <div id="form-buttons">
+                <button>Look for the best flights</button>
+                <button>Clear all</button>
+            </div>
+        </form>
     </main>
     <footer>
         <p>All rights reserved. 2023</p>
