@@ -1,10 +1,16 @@
 form {
+    font-family: 'Raleway', sans-serif;
     width: 50rem;
     margin: 3rem auto;
     padding: 1rem;
     background-color: var(--color-dark-blue);
     border-radius: 6px;
     box-sizing: border-box;
+}
+
+form #type-of-trip {
+    color: var(--color-white);
+    margin: 1rem auto;
 }
 
 form #travel-info {
@@ -26,6 +32,18 @@ form section h3 {
 form section input {
     width: 75%;
     margin: 0.5rem auto;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    align-items: center;
+}
+
+form section select {
+    width: 75%;
+    text-align: center;
+    margin: 0.5rem auto;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+
 }
 
 form #form-buttons {
@@ -33,7 +51,6 @@ form #form-buttons {
 }
 
 form button {
-    font-family: 'Raleway', sans-serif;
     font-size: var(--font-size-small);
 }
 

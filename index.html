@@ -60,31 +60,47 @@
         </ol>
     </header>
     <main>
-        <form action="/" method="GET">
+        <form action="/flight-search.html" method="GET">
+            <div id="type-of-trip">
+                <h3>How do you want to plan your trip?</h3>
+                <label for="round-trip">Round trip</label>
+                <input type="radio" name="type-of-trip" id="round-trip" value="round-trip" required>
+                <label for="one-way">One way</label>
+                <input type="radio" name="type-of-trip" id="one-way" value="one-way" required>
+            </div>
             <div id="travel-info">
                 <section>
                     <h3>Where are you going?</h3>
                     <label for="origin">Origin</label>
-                    <input type="text" name="origin" id="origin">
+                    <select name="origin" id="origin" required>
+                        <option disabled selected>Select an origin</option>
+                        <option value="BOG">Bogotá - BOG</option>
+                        <option value="MDE">Medellín - MDE</option>
+                    </select>
                     <label for="destination">Destination</label>
-                    <input type="text" name="destination" id="destination">
+                    <select name="destination" id="destination" required>
+                        <option disabled selected>Select a destination</option>
+                        <option value="BOG">Bogotá - BOG</option>
+                        <option value="MDE">Medellín - MDE</option>
+                    </select>
                 </section>
                 <section>
                     <h3>When are you travelling?</h3>
                     <label for="depart-date">Departing date</label>
-                    <input type="date" name="depart-date" id="depart-date">
+                    <input type="date" name="depart-date" id="depart-date" required min="2023-06-17" max="2024-03-30">
                     <label for="return-date">Returning date</label>
-                    <input type="date" name="return-date" id="return-date">
+                    <input type="date" name="return-date" id="return-date" required min="2023-06-17" max="2024-03-30">
                 </section>
                 <section>How many people are going?
                     <br><br>
-                        <label for="pax-number">Number of passengers</label>
-                        <input type="number" name="pax-number" id="pax-number">
+                    <label for="pax-number">Number of passengers</label>
+                    <input type="number" name="pax-number" id="pax-number" step="1" min="1" max="10" required
+                        placeholder=1>
                 </section>
             </div>
             <div id="form-buttons">
-                <button>Look for the best flights</button>
-                <button>Clear all</button>
+                <button type="submit">Look for the best flights</button>
+                <button type="reset">Clear all</button>
             </div>
         </form>
     </main>

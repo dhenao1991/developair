@@ -3,7 +3,7 @@ html {
     --color-light-blue: #c8d8e4;
     --color-white: #ffffff;
     --color-light-grey: #f2f2f2;
-    --color-dark-grey: rgb(21, 21, 21);
+    --color-dark-grey: rgb(77, 76, 76);
     --color-green: #52ab98;
     --color-pale-yellow: rgb(253, 239, 213);
     
@@ -16,6 +16,11 @@ body {
     text-align: center;
     background-color:var(--color-light-blue);
     font-family: 'Raleway', sans-serif;
+}
+
+strong {
+    font-weight: bold;
+    color: var(--color-dark-blue);
 }
 
 nav {

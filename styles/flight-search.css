@@ -1,0 +1,73 @@
+h2 {
+    margin-top:2.5rem ;
+}
+
+.flight-option {
+    width: 70%;
+    margin: 1.5rem auto;
+    padding-bottom: 0.5rem;
+    border-width: 0.1rem;
+    border-style: groove;
+    border-color: var(--color-dark-grey);
+    border-radius: 8px;
+    background-color: var(--color-white);
+}
+
+.flight-option .flight-irrelevant-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0.25rem auto;
+    color: var(--color-dark-grey);
+}
+
+.flight-relevant-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.flight-relevant-details .station-information {
+    display: flex;
+}
+
+.flight-relevant-details .station-information .dep-or-arr-time {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: var(--color-dark-blue);
+}
+
+.flight-relevant-details .station-information .dep-or-arr-station {
+    font-size: var(--font-size-small);
+    margin: auto 1rem;
+    color: var(--color-dark-grey);
+}
+
+.select-flight-pseudo-button {
+    margin: 0 auto;
+    padding: 0 0.4rem;
+    width: max-content;
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--color-green);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    font-size: var(--font-size-medium)/2;
+}
+
+.select-flight-pseudo-button:hover {
+    background-color: var(--color-dark-blue);
+    font-weight: bold;
+    color: var(--color-white);
+}
+
+#go-back-to-main-page {
+    background-color: var(--color-dark-grey);
+    color: var(--color-white);
+    border-radius: 8px;
+    margin: 0.2rem 0.2rem;
+    padding: 0.25rem 0.25rem;
+}
