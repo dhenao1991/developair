@@ -1,0 +1,62 @@
+h2 {
+    margin-top:2.5rem ;
+}
+
+#itinerary {
+    width: 85%;
+    margin: 1rem auto;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    border-style:solid;
+    border-color: var(--color-dark-blue);
+    border-width: 0.1rem;
+}
+
+#flights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.flight-information {
+    margin: 0.5rem 0.5rem;
+}
+
+.departure-and-arrival-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.airport-info {
+border-width: 0.1rem;
+    border-color: var(--color-green);
+    border-style: solid;
+    margin: 0.5rem 0.25rem;
+    padding: 0.25rem 0.25rem;
+    border-radius: 8px;
+}
+
+#change-selected-itinerary {
+    background-color: var(--color-dark-grey);
+    color: var(--color-white);
+    border-radius: 8px;
+    margin: 0.2rem 0.5rem;
+}
+
+/*Media queries here for responsive design*/
+
+@media(max-width: 768px){  
+    #itinerary{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #flights {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .departure-and-arrival-info {
+        display: flex;
+        flex-direction: column;
+    }
+}
