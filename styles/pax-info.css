@@ -2,6 +2,11 @@ h2 {
     margin-top:2.5rem ;
 }
 
+h3 {
+    text-align: left;
+    margin-left: 1rem;
+}
+
 #itinerary {
     width: 85%;
     margin: 1rem auto;
@@ -35,12 +40,61 @@ border-width: 0.1rem;
     border-radius: 8px;
 }
 
-#change-selected-itinerary {
+#change-selected-itinerary a {
     background-color: var(--color-dark-grey);
     color: var(--color-white);
     border-radius: 8px;
-    margin: 0.2rem 0.5rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.25rem;
 }
+
+form {
+    background-color: var(--color-white);
+    width: 85%;
+    margin: 1rem auto;
+    border-radius: 12px;
+}
+
+form h4 {
+    font-weight: bold;
+    color: var(--color-green);
+    text-align: left;
+    display: block;
+    margin: 1rem 2rem;
+    padding-top: 0.5rem;
+}
+
+form .individual-pax-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    text-align: left;
+    margin: 0.5rem 1rem;
+}
+
+form label,input {
+    margin-top: 0.25rem;
+    margin-left: 0.5rem;
+}
+
+form button {
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+    font-weight: bold;
+    border-radius: 6px;
+    font-size: var(--font-size-small);
+    margin: 0.5rem 0.5rem;
+    border-color: none;
+}
+
+form button:hover{
+    text-decoration: underline;
+    background-color: var(--color-light-blue);
+    color: var(--color-dark-grey);
+}
+
+
 
 /*Media queries here for responsive design*/
 
@@ -58,5 +112,9 @@ border-width: 0.1rem;
     .departure-and-arrival-info {
         display: flex;
         flex-direction: column;
+    }
+
+    form .individual-pax-info {
+        grid-template-columns: 1fr 1fr ;
     }
 }

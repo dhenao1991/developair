@@ -48,7 +48,7 @@
         </div>
     </aside>
     <h2>Wohoo! Let's get you this ticket</h2>
-    <h3 style="text-align: left; margin-left: 1rem;">Here is your selected itinerary:</h3>
+    <h3>Here is your selected itinerary:</h3>
     <section id="itinerary">
         <section id="flights">
             <section class="flight-information">
@@ -86,9 +86,32 @@
                 </div>
             </section>
         </section>
-        <a href="/flight-search.html" id="change-selected-itinerary">Change the selected itinerary
-        </a>
+        <div id="change-selected-itinerary">
+            <a href="/flight-search.html">Change the selected itinerary
+            </a>
+        </div>
     </section>
+    <h3>Now let's make sure that your seats are stored under your name:</h3>
+    <form action="" method="GET" id="pax-contact-data">
+        <h4>Passenger 1</h4>
+        <div class="individual-pax-info">
+            <label for="pax-name">Name</label>
+            <input type="text" name="pax-name" required>
+            <label for="pax-last-name">Last Name</label>
+            <input type="text" name="pax-last-name" required>
+            <label for="pax-date-of-birth">Date of birth</label>
+            <input type="date" name="pax-date-of-birth" required>
+            <label for="pax-email">Email address</label>
+            <input type="email" name="pax-email" required>
+            <label for="pax-phone-number">Phone number</label>
+            <input type="tel" name="pax-phone-number" required>
+            <label for="pax-country">Country of residence</label>
+            <input type="text" name="pax-country" required>
+        </div>
+        <button type="submit">Save data</button>
+        <button type="reset">Clear data</button>
+    </form>
+
 
 </body>
 

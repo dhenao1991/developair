@@ -46,6 +46,12 @@ h2 {
     color: var(--color-dark-grey);
 }
 
+.select-flight {
+    text-align: right;
+    margin-right: 1rem;
+    margin-top: 0.75rem;
+}
+
 .select-flight-pseudo-button {
     margin: 0 auto;
     padding: 0 0.4rem;
@@ -70,4 +76,12 @@ h2 {
     border-radius: 8px;
     margin: 0.2rem 0.2rem;
     padding: 0.25rem 0.25rem;
+}
+
+/*Media queries here for responsive design*/
+
+@media(max-width: 768px){  
+    .select-flight {
+        text-align: center;
+    }
 }
