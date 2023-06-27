@@ -1,0 +1,43 @@
+h2 {
+        margin-top:2.5rem ;
+    }
+
+#successful-purchase-box{
+    max-width: 60%;
+    margin: 1.5rem auto;
+    background-color: var(--color-white);
+    border-radius: 12px;
+}
+
+#successful-purchase-box h3{
+    font-size: var(--font-size-small);
+    margin: 0.5rem auto;
+    display: inline-block;
+}
+
+#successful-purchase-box p {
+    margin: 0.5rem auto;
+}
+
+#confirmation-code {
+    color:var(--color-dark-blue);
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    margin: 0.5rem auto;
+}
+
+#successful-purchase-box a {
+    display: inline-block;
+    margin: 0.5rem 0.75rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    background-color: var(--color-green);
+    color: var(--color-white);
+}
+
+#successful-purchase-box a:hover {
+    font-weight: bold;
+    background-color: var(--color-dark-blue);
+}
+
+

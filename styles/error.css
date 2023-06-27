@@ -1,0 +1,31 @@
+h2 {
+    margin-top: 2.5rem;
+}
+
+#error-message{
+    max-width: 60%;
+    margin: 1.2rem auto;
+    background-color: var(--color-white);
+    border-radius: 12px;
+}
+
+#error-message h2 {
+    display: inline-block;
+    margin: 1rem auto;
+    color: var(--color-dark-blue);
+
+}
+
+#error-message a {
+    display: inline-block;
+    margin: 1rem 0.75rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    background-color: var(--color-green);
+    color: var(--color-white);
+}
+
+#error-message a:hover {
+    font-weight: bold;
+    background-color: var(--color-dark-blue);
+}

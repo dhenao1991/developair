@@ -1,0 +1,29 @@
+#find-booking {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#page-title {
+    background-color: var(--color-dark-blue);
+    margin: 15rem auto;
+}
+
+#page-title h2 {
+    color: var(--color-white);
+}
+
+#find-reservation-form {
+    background-color: var(--color-light-blue);
+    margin-top: 15rem;
+}
+
+form button{
+    display:block;
+    margin: 1rem auto;
+    background-color: var(--color-dark-grey);
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: var(--font-size-small);
+    color: var(--color-white);
+    border-radius: 6px;
+}
