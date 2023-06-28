@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/css-reset.css">
+    <link href="/styles/shared.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/review-booking.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <title>DevelopAir</title>
+</head>
+
+<body>
+    <nav>
+        <ol>
+            <li>
+                <a href="index.html">DevelopAir</a>
+            </li>
+            <li>
+                <a href="destinations.html">Destinations</a>
+            </li>
+        </ol>
+    </nav>
+    <a href="#side-drawer" class="menu-button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <aside id="side-drawer">
+        <a href="#" class="menu-button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+        <div id="side-drawer-header">
+            <ol>
+                <li>
+                    <a href="index.html">DevelopAir</a>
+                </li>
+                <li>
+                    <a href="destinations.html">Destinations</a>
+                </li>
+            </ol>
+        </div>
+    </aside>
+    <div id="pax-greeting">
+        <h2>Hello, <strong id="booked-pax-name">Felipe</strong></h2>
+        <h3>Here's the itinerary you have booked with us under the confirmation code <span
+                id="booked-confirmation-code">123456</span></h3>
+    </div>
+    <h3 class="section-title">Passenger data</h3>
+    <div id="booked-passenger-data">
+        <p>Passenger name: Felipe</p>
+        <p>Passenger last name: Urriza</p>
+        <p>Passenger date of birth: 21/09/1991</p>
+        <p>Passenger email address: felipe.urriza@gmail.com</p>
+        <p>Passenger phone number: +57 3003103231</p>
+        <p>Passenger country of residence: Colombia</p>
+    </div>
+    <h3 class="section-title">Your itinerary</h3>
+    <section id="booked-itinerary">
+        <section class="booked-flight-information">
+            <strong>Outbound flight:</strong>
+            <div class="booked-date-and-flight-number">
+                <p>Departing Date: Wednesday, July 4, 2023</p>
+                <p>Flight number: DA 1200</p>
+            </div>
+            <div class="booked-departure-and-arrival-info">
+                <div class="booked-airport-info">
+                    <p>Origin: Medellín (MDE)</p>
+                    <p>Departure time: 06:00 am</p>
+                </div>
+                <div class="booked-airport-info">
+                    <p>Destination: Bogotá (BOG)</p>
+                    <p>Arrival time: 07:00 am </p>
+                </div>
+            </div>
+        </section>
+        <section class="booked-flight-information">
+            <strong>Inbound flight:</strong>
+            <div class="booked-date-and-flight-number">
+                <p>Returning Date: Thursday, July 12, 2023</p>
+                <p>Flight number: DA 1207</p>
+            </div>
+            <div class="booked-departure-and-arrival-info">
+                <div class="booked-airport-info">
+                    <p>Origin: Bogotá (BOG)</p>
+                    <p>Departure time: 04:30 pm</p>
+                </div>
+                <div class="booked-airport-info">
+                    <p>Destination: Medellín (MDE)</p>
+                    <p>Arrival time: 05:30 pm </p>
+                </div>
+            </div>
+        </section>
+    </section>
+    <p style="text-align:left; margin-left:1rem; margin-bottom:0.75rem">If you wish to make changes to your itinerary, please call to our contact center.</p>
+</body>
+
+</html>
