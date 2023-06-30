@@ -56,3 +56,16 @@
     
 }
 
+
+/*Media queries here for responsive design*/
+
+@media(max-width: 768px){  
+    #booked-itinerary {
+        flex-direction: column;
+        padding: 0.5rem 0;
+    }
+
+    .booked-flight-information {
+        margin: 0.5rem 0;
+    }
+}

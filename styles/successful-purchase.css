@@ -3,7 +3,7 @@ h2 {
     }
 
 #successful-purchase-box{
-    max-width: 60%;
+    max-width: 80%;
     margin: 1.5rem auto;
     background-color: var(--color-white);
     border-radius: 12px;
