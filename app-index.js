@@ -1,7 +1,5 @@
-//Variable for the Submit Data Button
-let submitDataForFlightSearchButtonElement = document.getElementById(
-  "submit-data-for-flight-search"
-);
+//Variable for the Submit Data Form
+let dataForFlightSearchForm = document.querySelector('form');
 
 //Variables for all input elements
 let roundTripElement = document.getElementById("round-trip");
@@ -12,14 +10,16 @@ let departDateElement = document.getElementById("depart-date");
 let returnDateElement = document.getElementById("return-date");
 let paxNumberElement = document.getElementById("pax-number");
 
-function checkOriginAndDestination(){
-    const origin = originElement.value;
-    const destination = destinationElement.value;
-    if (origin == destination){
-        originElement.selectedIndex = -1; //El -1 quita la selección
-        destinationElement.selectedIndex = -1;
-        alert('The origin and the destination cannot be the same. Please change your choices.');
-    }
+function checkOriginAndDestination() {
+  const origin = originElement.value;
+  const destination = destinationElement.value;
+  if (origin == destination) {
+    originElement.selectedIndex = -1; //El -1 quita la selección
+    destinationElement.selectedIndex = -1;
+    alert(
+      "The origin and the destination cannot be the same. Please change your choices."
+    );
+  }
 }
 
 function hideReturnDateIfOneWay() {
@@ -50,7 +50,7 @@ function restrictReturnDate() {
   returnDateElement.min = departDate;
 }
 
-function validateSearchData() {
+function validateSearchData(event) {
   //Define variables for the input values
   let roundTrip = roundTripElement.checked;
   let oneWay = oneWayElement.checked;
@@ -60,14 +60,38 @@ function validateSearchData() {
   let returnDate = returnDateElement.value;
   let paxNumber = paxNumberElement.value;
 
-  //Print the values
-  console.log("Value of roundTrip: " + roundTrip);
-  console.log("Value of oneWay: " + oneWay);
-  console.log("The selected origin is: " + origin);
-  console.log("The selected destination is: " + destination);
-  console.log("The departing date is: " + departDate);
-  console.log("The returning date is: " + returnDate);
-  console.log("The number of pax is: " + paxNumber);
+  //Form validation
+  if (
+    (roundTrip || oneWay) &&
+    origin != "Select an origin" &&
+    destination != "Select a destination" &&
+    departDate != "" &&
+    paxNumber > 0
+  ) {
+    if (roundTrip && returnDate != "") {
+      //Validation successful for roundtrip
+      console.log("Validation successful for round-trip");
+      console.log("Value of roundTrip: " + roundTrip);
+      console.log("Value of oneWay: " + oneWay);
+      console.log("The selected origin is: " + origin);
+      console.log("The selected destination is: " + destination);
+      console.log("The departing date is: " + departDate);
+      console.log("The returning date is: " + returnDate);
+      console.log("The number of pax is: " + paxNumber);
+    } else if (oneWay) {
+      // Validation successful for one-way
+      console.log("Validation successful for one-way trip");
+      console.log("Value of roundTrip: " + roundTrip);
+      console.log("Value of oneWay: " + oneWay);
+      console.log("The selected origin is: " + origin);
+      console.log("The selected destination is: " + destination);
+      console.log("The departing date is: " + departDate);
+      console.log("The number of pax is: " + paxNumber);
+    }
+  } else {
+    alert("Validation unsuccessful");
+    event.preventDefault();
+  }
 }
 
 //Event listener for setting the minimum departureDate
@@ -78,11 +102,11 @@ roundTripElement.addEventListener("change", hideReturnDateIfOneWay);
 oneWayElement.addEventListener("change", hideReturnDateIfOneWay);
 
 //Event listeners for checking that origin and destination are different
-originElement.addEventListener('change',checkOriginAndDestination);
-destinationElement.addEventListener('change',checkOriginAndDestination);
+originElement.addEventListener("change", checkOriginAndDestination);
+destinationElement.addEventListener("change", checkOriginAndDestination);
 
 //Event listener for restricting the returnDate according to the departDate
 departDateElement.addEventListener("change", restrictReturnDate);
 
 //Event listener for form validation
-submitDataForFlightSearchButtonElement.addEventListener("click",validateSearchData);
+dataForFlightSearchForm.addEventListener("submit",validateSearchData);
