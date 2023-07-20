@@ -19,13 +19,13 @@
     <nav>
         <ol>
             <li>
-                <a href="index.html">DevelopAir</a>
+                <a href="/index">DevelopAir</a>
             </li>
             <li>
-                <a href="find-booking-form.html">My booking</a>
+                <a href="/find-booking-form">My booking</a>
             </li>
             <li>
-                <a href="destinations.html">Destinations</a>
+                <a href="/destinations">Destinations</a>
             </li>
         </ol>
     </nav>
@@ -43,13 +43,13 @@
         <div id="side-drawer-header">
             <ol>
                 <li>
-                    <a href="index.html">DevelopAir</a>
+                    <a href="/index">DevelopAir</a>
                 </li>
                 <li>
-                    <a href="destinations.html">Destinations</a>
+                    <a href="/destinations">Destinations</a>
                 </li>
                 <li>
-                    <a href="find-booking-form.html">My booking</a>
+                    <a href="/find-booking-form">My booking</a>
                 </li>
             </ol>
         </div>
@@ -59,9 +59,9 @@
             <h2>Let's find your reservation</h2>
         </section>
         <section id="find-reservation-form">
-            <form action="/review-booking.html" method="GET">
+            <form action="/find-existing-booking" method="POST">
                 <label for="reservation-code">Reservation code:</label>
-                <input type="text" id="reservation-code" required>
+                <input type="text" id="reservation-code" name="reservation-code" required>
                 <button type="submit" id="find-reservation-button">Find my reservation</button>
             </form>
         </section>

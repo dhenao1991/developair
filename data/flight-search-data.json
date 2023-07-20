@@ -1,0 +1,10 @@
+[
+    {
+        "type-of-trip": "one-way",
+        "origin": "BOG",
+        "destination": "MDE",
+        "depart-date": "2023-07-21",
+        "return-date": "",
+        "pax-number": "1"
+    }
+]
