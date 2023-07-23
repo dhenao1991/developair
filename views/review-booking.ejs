@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('includes/head-config') %>
+    <link rel="stylesheet" href="/styles/review-booking.css">
+    <title>DevelopAir</title>
+</head>
+
+<body>
+    <%- include('includes/nav-bar')%>
+    <%- include('includes/side-drawer')%>    
+    <div id="pax-greeting">
+        <h2>Hello, <strong id="booked-pax-name">Felipe</strong></h2>
+        <h3>Here's the itinerary you have booked with us under the confirmation code <span
+                id="booked-confirmation-code">123456</span></h3>
+    </div>
+    <h3 class="section-title">Passenger data</h3>
+    <div id="booked-passenger-data">
+        <p>Passenger name: Felipe</p>
+        <p>Passenger last name: Urriza</p>
+        <p>Passenger date of birth: 21/09/1991</p>
+        <p>Passenger email address: felipe.urriza@gmail.com</p>
+        <p>Passenger phone number: +57 3003103231</p>
+        <p>Passenger country of residence: Colombia</p>
+    </div>
+    <h3 class="section-title">Your itinerary</h3>
+    <section id="booked-itinerary">
+        <section class="booked-flight-information">
+            <strong>Outbound flight:</strong>
+            <%-include('includes/reserved-flight-details') %>
+        </section>
+        <section class="booked-flight-information">
+            <strong>Inbound flight:</strong>
+            <%-include('includes/reserved-flight-details') %>
+        </section>
+    </section>
+    <p style="text-align:left; margin-left:1rem; margin-bottom:0.75rem">If you wish to make changes to your itinerary, please call us at our contact center.</p>
+</body>
+
+</html>

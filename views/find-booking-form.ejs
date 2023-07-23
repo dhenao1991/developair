@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('includes/head-config') %>
+    <link rel="stylesheet" href="/styles/find-booking-form.css">
+    <script src="scripts/app-find-booking-form.js" defer></script>
+    <title>DevelopAir</title>
+</head>
+
+<body>
+    <%- include('includes/nav-bar')%>
+    <%- include('includes/side-drawer')%>    
+    <div id="find-booking">
+        <section id="page-title">
+            <h2>Let's find your reservation</h2>
+        </section>
+        <section id="find-reservation-form">
+            <form action="/find-existing-booking" method="POST">
+                <label for="reservation-code">Reservation code:</label>
+                <input type="text" id="reservation-code" name="reservation-code" required>
+                <button type="submit" id="find-reservation-button">Find my reservation</button>
+            </form>
+        </section>
+    </div>
+    </form>
+</body>
+
+</html>

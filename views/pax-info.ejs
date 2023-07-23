@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('includes/head-config') %>
+    <link rel="stylesheet" href="/styles/pax-info.css">
+    <script src="scripts/app-pax-info.js" defer></script>
+    <title>DevelopAir</title>
+</head>
+
+<body>
+    <%- include('includes/nav-bar')%>
+    <%- include('includes/side-drawer')%>    
+    <h2>Wohoo! Let's get you this ticket</h2>
+    <h3>Here is your selected itinerary:</h3>
+    <section id="itinerary">
+        <section id="flights">
+            <section class="flight-information">
+                <strong>Outbound flight:</strong>
+                <div class="date-and-flight-number">
+                    <p>Departing Date: Wednesday, July 4, 2023</p>
+                    <p>Flight number: DA 1200</p>
+                </div>
+                <%-include('includes/selected-flight-details')  %>
+            </section>
+            <section class="flight-information">
+                <strong>Inbound flight:</strong>
+                <div class="date-and-flight-number">
+                    <p>Returning Date: Thursday, July 12, 2023</p>
+                    <p>Flight number: DA 1207</p>
+                </div>
+                <%-include('includes/selected-flight-details')  %>
+            </section>
+        </section>
+        <div id="change-selected-itinerary">
+            <a href="/flight-search">Change the selected itinerary
+            </a>
+        </div>
+    </section>
+    <h3>Now let's make sure that your seats are stored under your name:</h3>
+    <form action="/submit-pax-data-for-reservation" method="POST" id="pax-contact-data">
+        <h4>Passenger 1</h4>
+        <div class="individual-pax-info">
+            <label for="pax-name">Name</label>
+            <input type="text" name="pax-name" id="pax-name" required>
+            <label for="pax-last-name">Last Name</label>
+            <input type="text" name="pax-last-name" id="pax-last-name" required>
+            <label for="pax-date-of-birth">Date of birth</label>
+            <input type="date" name="pax-date-of-birth" id="pax-date-of-birth" required>
+            <label for="pax-email">Email address</label>
+            <input type="email" name="pax-email" id="pax-email" required>
+            <label for="pax-phone-number">Phone number</label>
+            <input type="tel" name="pax-phone-number" id="pax-phone-number" required>
+            <label for="pax-country">Country of residence</label>
+            <input type="text" name="pax-country" id="pax-country" required>
+            <label for="pax-credit-card-info">Credit card number and information (later)</label>
+        </div>
+        <button type="submit" id="submit-pax-data">Purchase ticket</button>
+        <button type="reset">Clear data</button>
+    </form>
+
+
+</body>
+
+</html>

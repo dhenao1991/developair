@@ -15,7 +15,7 @@ app.listen(3000);
 //Set up the server
 const express = require('express');
 const app = express();
-const path = require('path');
+const path = require('path'); //path --> for creating paths for files
 const fs = require('fs') //file system --> for storing data
 
 //Serve all static files
@@ -24,41 +24,56 @@ app.use(express.static('public'));
 //Middleware for parsing url-encoded data
 app.use(express.urlencoded({extended:false}));
 
+//Indicate that we will be using EJS templates
+app.set('views',path.join(__dirname,'views'));
+app.set('view engine', 'ejs');
+
 //Set up the GET routes for loading each page
 
 app.get('/', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','index.html');
-    res.sendFile(htmlFilePath);
+    //Old way
+    //const htmlFilePath = path.join(__dirname,'views','index.html');
+    //res.sendFile(htmlFilePath);
+    //New way
+    res.render('index');
 });
 
 app.get('/flight-search', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','flight-search.html');
-    res.sendFile(htmlFilePath);
+    const filePath = path.join(__dirname,'data','flight-search-data.json');
+    const fileData = fs.readFileSync(filePath);
+    const entireFlightSearchData = JSON.parse(fileData)
+    const lastFlightSearchData = entireFlightSearchData[entireFlightSearchData.length-1]
+    console.log(lastFlightSearchData);
+    const origin = lastFlightSearchData.origin;
+    const destination = lastFlightSearchData.destination;
+    const departDate = lastFlightSearchData['depart-date'];
+    const returnDate = lastFlightSearchData['return-date'];
+    res.render('flight-search',{
+        origin:origin,
+        destination:destination,
+        departDate:departDate,
+        returnDate:returnDate
+    });
 });
 
 app.get('/pax-info', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','pax-info.html');
-    res.sendFile(htmlFilePath);
+   res.render('pax-info');
 });
 
 app.get('/successful-purchase', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','successful-purchase.html');
-    res.sendFile(htmlFilePath);
+    res.render('successful-purchase');
 });
 
 app.get('/find-booking-form', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','find-booking-form.html');
-    res.sendFile(htmlFilePath);
+    res.render('find-booking-form');
 });
 
 app.get('/review-booking', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','review-booking.html');
-    res.sendFile(htmlFilePath);
+    res.render('review-booking');
 });
 
 app.get('/destinations', function(req,res){
-    const htmlFilePath = path.join(__dirname,'views','destinations.html');
-    res.sendFile(htmlFilePath);
+    res.render('destinations');
 });
 
 //Set up POST routes for processing form submissions

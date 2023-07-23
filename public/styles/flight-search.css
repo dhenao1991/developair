@@ -2,6 +2,10 @@ h2 {
     margin-top:2.5rem ;
 }
 
+h3 {
+    margin: 0.5rem 0;
+}
+
 .flight-option {
     width: 70%;
     margin: 1.5rem auto;
@@ -74,7 +78,7 @@ h2 {
     background-color: var(--color-dark-grey);
     color: var(--color-white);
     border-radius: 8px;
-    margin: 0.2rem 0.2rem;
+    margin: 0.5rem 0.2rem;
     padding: 0.25rem 0.25rem;
 }
 

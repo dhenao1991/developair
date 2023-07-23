@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('includes/head-config') %>
+    <link rel="stylesheet" href="/styles/index.css">
+    <script src="scripts/app-index.js" defer></script>
+    <title>DevelopAir</title>
+</head>
+
+<body>
+    <%- include('includes/nav-bar')%>
+    <%- include('includes/side-drawer')%>    
+    <header>
+        <ol>
+            <li>
+                <h1>Welcome to DevelopAir</h1>
+            </li>
+            <li>
+                <h2>
+                    Here you will book the best non-existent tickets!
+                </h2>
+            </li>
+        </ol>
+    </header>
+    <main>
+        <form action="/submit-flight-data-information" method="POST">
+            <div id="type-of-trip">
+                <h3>How do you want to plan your trip?</h3>
+                <label for="round-trip">Round trip</label>
+                <input type="radio" name="type-of-trip" id="round-trip" value="round-trip" required>
+                <label for="one-way">One way</label>
+                <input type="radio" name="type-of-trip" id="one-way" value="one-way" required>
+            </div>
+            <div id="travel-info">
+                <section>
+                    <h3>Where are you going?</h3>
+                    <label for="origin">Origin</label>
+                    <select name="origin" id="origin" required>
+                        <option disabled selected>Select an origin</option>
+                        <option value="BOG">Bogotá - BOG</option>
+                        <option value="MDE">Medellín - MDE</option>
+                    </select>
+                    <label for="destination">Destination</label>
+                    <select name="destination" id="destination" required>
+                        <option disabled selected>Select a destination</option>
+                        <option value="BOG">Bogotá - BOG</option>
+                        <option value="MDE">Medellín - MDE</option>
+                    </select>
+                </section>
+                <section>
+                    <h3>When are you travelling?</h3>
+                    <label for="depart-date">Departing date</label>
+                    <input type="date" name="depart-date" id="depart-date" required max="2024-03-30">
+                    <label for="return-date" id="return-date-label">Returning date</label>
+                    <input type="date" name="return-date" id="return-date" max="2024-03-30">
+                </section>
+                <section>How many people are going?
+                    <br><br>
+                    <label for="pax-number">Number of passengers</label>
+                    <input type="number" name="pax-number" id="pax-number" step="1" min="1" max="10" required
+                        placeholder=1>
+                </section>
+            </div>
+            <div id="form-buttons">
+                <button type="submit" id="submit-data-for-flight-search">Look for the best flights</button>
+                <button type="reset">Clear all</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>All rights reserved. 2023</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('includes/head-config') %>
+    <link rel="stylesheet" href="/styles/successful-purchase.css">
+    <title>DevelopAir</title>
+</head>
+
+<body>
+    <%- include('includes/nav-bar')%>
+    <%- include('includes/side-drawer')%>    
+    <h2>Yay! Your purchase was successful!</h2>
+    <section id="successful-purchase-box">
+        <h3>You'll get an email with all your itinerary.</h3>
+        <p>Your confirmation code is:</p>
+        <p id="confirmation-code">123456</p>
+        <p>You may choose what to do now:</p>
+        <a href="/find-booking-form">View my reservation</a>
+        <a href="/index">Go to the main page</a>
+        <a href="/destinations">Explore our destinations</a>
+    </section>
+</body>
+
+</html>
