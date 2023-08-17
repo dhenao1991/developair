@@ -28,6 +28,9 @@ app.use(express.urlencoded({extended:false}));
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
 
+//Require modules from external files
+const readNWritefunctions = require('./util/read-n-write-functions');
+
 //Set up the GET routes for loading each page
 
 app.get('/', function(req,res){
@@ -39,10 +42,8 @@ app.get('/', function(req,res){
 });
 
 app.get('/flight-search', function(req,res){
-    const filePath = path.join(__dirname,'data','flight-search-data.json');
-    const fileData = fs.readFileSync(filePath);
-    const entireFlightSearchData = JSON.parse(fileData)
-    const lastFlightSearchData = entireFlightSearchData[entireFlightSearchData.length-1]
+    //Load flight search data
+    const lastFlightSearchData = readNWritefunctions.getFlightSearchData();
     console.log(lastFlightSearchData);
     const origin = lastFlightSearchData.origin;
     const destination = lastFlightSearchData.destination;
@@ -88,11 +89,7 @@ app.post('/submit-flight-data-information',function(req,res){
     //The data validation should come here
     //Storing the information in a file
     const flightSearchData = req.body;
-    const filePath = path.join(__dirname,'data','flight-search-data.json');
-    const fileData = fs.readFileSync(filePath);
-    const storedFlightSearchData = JSON.parse(fileData);
-    storedFlightSearchData.push(flightSearchData);
-    fs.writeFileSync(filePath,JSON.stringify(storedFlightSearchData));
+    readNWritefunctions.storeFlightSearchData(flightSearchData);
     //Redirecting to the next page
     res.redirect('/flight-search')
 });
@@ -109,11 +106,7 @@ app.post('/submit-pax-data-for-reservation',function(req,res){
     //The data validation should come here
     //Storing the information in a file
     const paxDataForReservation = req.body;
-    const filePath = path.join(__dirname,'data','pax-data-for-reservation.json');
-    const fileData = fs.readFileSync(filePath);
-    const storedPaxDataForReservation = JSON.parse(fileData);
-    storedPaxDataForReservation.push(paxDataForReservation);
-    fs.writeFileSync(filePath,JSON.stringify(storedPaxDataForReservation));
+    readNWritefunctions.storePaxDataForReservation(paxDataForReservation);
     //Redirecting to the next page
     res.redirect('/successful-purchase')
 });
@@ -123,14 +116,20 @@ app.post('/find-existing-booking',function(req,res){
     const reservationCode = +req.body['reservation-code'];
     //The data validation should come here
     //Storing the information in a file
-    const currentReservationCode = req.body;
-    const filePath = path.join(__dirname,'data','submitted-reservation-code.json');
-    const fileData = fs.readFileSync(filePath);
-    const storedReservationCode = JSON.parse(fileData);
-    storedReservationCode.push(currentReservationCode);
-    fs.writeFileSync(filePath,JSON.stringify(storedReservationCode));
+    const submittedReservationCode = req.body;
+    readNWritefunctions.storeSubmittedReservationCode(submittedReservationCode);
     //Redirecting to the next page
     res.redirect('/review-booking')
+});
+
+//Here we will add a middleware for the 404 status
+app.use(function(req,res){
+    res.status(404).render('404');
+});
+
+//And here we'll have a middleware for the 500 status
+app.use(function(error,req,res,next){
+    res.status(500).render('500');
 });
 
 app.listen(3000);
