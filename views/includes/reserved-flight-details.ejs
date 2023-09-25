@@ -1,14 +1,14 @@
 <div class="booked-date-and-flight-number">
-    <p>Date: Wednesday, July 4, 2023</p>
-    <p>Flight number: DA 1200</p>
+    <p>Date: <%= departureDate %></p>
+    <p>Flight number: DA <%= flightNumber %></p>
 </div>
 <div class="booked-departure-and-arrival-info">
     <div class="booked-airport-info">
-        <p>Origin: Medellín (MDE)</p>
-        <p>Departure time: 06:00 am</p>
+        <p>Origin: <%= originCity %> - <%= originName %> (<%= origin %>)</p>
+        <p>Departure time: <%= departureTime %></p>
     </div>
     <div class="booked-airport-info">
-        <p>Destination: Bogotá (BOG)</p>
-        <p>Arrival time: 07:00 am </p>
+        <p>Destination: <%= destinationCity %> - <%= destinationName %> (<%= destination %>)</p>
+        <p>Arrival time: <%= arrivalTime %> </p>
     </div>
 </div>

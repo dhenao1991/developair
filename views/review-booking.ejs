@@ -11,29 +11,54 @@
     <%- include('includes/nav-bar')%>
     <%- include('includes/side-drawer')%>    
     <div id="pax-greeting">
-        <h2>Hello, <strong id="booked-pax-name">Felipe</strong></h2>
+        <h2>Hello, <strong id="booked-pax-name"><%= reservationData.paxName %></strong></h2>
         <h3>Here's the itinerary you have booked with us under the confirmation code <span
-                id="booked-confirmation-code">123456</span></h3>
+                id="booked-confirmation-code"><%= reservationData.reservationCode %></span></h3>
     </div>
     <h3 class="section-title">Passenger data</h3>
     <div id="booked-passenger-data">
-        <p>Passenger name: Felipe</p>
-        <p>Passenger last name: Urriza</p>
-        <p>Passenger date of birth: 21/09/1991</p>
-        <p>Passenger email address: felipe.urriza@gmail.com</p>
-        <p>Passenger phone number: +57 3003103231</p>
-        <p>Passenger country of residence: Colombia</p>
+        <p>Passenger name: <%= reservationData.paxName %></p>
+        <p>Passenger last name: <%= reservationData.paxLastName %></p>
+        <p>Passenger date of birth: <%= reservationData.paxDateOfBirth %></p>
+        <p>Passenger email address: <%= reservationData.paxEmail %></p>
+        <p>Passenger phone number: <%= reservationData.paxPhone %></p>
+        <p>Passenger country of residence: <%= reservationData.paxCountry %></p>
     </div>
     <h3 class="section-title">Your itinerary</h3>
     <section id="booked-itinerary">
         <section class="booked-flight-information">
             <strong>Outbound flight:</strong>
-            <%-include('includes/reserved-flight-details') %>
+            <%-include('includes/reserved-flight-details',{
+                departureDate:reservationData.outboundDepartureDate,
+                flightNumber:reservationData.outboundFlightNumber,
+                origin: reservationData.outboundOrigin,
+                originCity: reservationData.outboundOriginCity,
+                originName: reservationData.outboundOriginName,
+                departureTime:reservationData.outboundDepartureTime,
+                destination: reservationData.outboundDestination,
+                destinationCity: reservationData.outboundDestinationCity,
+                destinationName: reservationData.outboundDestinationName,
+                arrivalTime:reservationData.outboundArrivalTime,
+            }) %>
         </section>
+
+        <% if(reservationData.inboundOrigin != null) { %>
         <section class="booked-flight-information">
             <strong>Inbound flight:</strong>
-            <%-include('includes/reserved-flight-details') %>
+            <%-include('includes/reserved-flight-details',{
+                departureDate:reservationData.inboundDepartureDate,
+                flightNumber:reservationData.inboundFlightNumber,
+                origin: reservationData.inboundOrigin,
+                originCity: reservationData.inboundOriginCity,
+                originName: reservationData.inboundOriginName,
+                departureTime:reservationData.inboundDepartureTime,
+                destination: reservationData.inboundDestination,
+                destinationCity: reservationData.inboundDestinationCity,
+                destinationName: reservationData.inboundDestinationName,
+                arrivalTime:reservationData.inboundArrivalTime,
+            }) %>
         </section>
+        <% } %>
     </section>
     <p style="text-align:left; margin-left:1rem; margin-bottom:0.75rem">If you wish to make changes to your itinerary, please call us at our contact center.</p>
 </body>
