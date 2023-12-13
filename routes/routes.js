@@ -1,35 +1,21 @@
 //Set up the server
 const express = require("express");
 const router = express.Router();
-const db = require('../data/database');
+const db = require("../data/database");
 
 //Require modules from external files
 const readNWritefunctions = require("../util/read-n-write-functions");
 
 //Set up the GET routes for loading each page
 
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
   //Old way
   //const htmlFilePath = path.join(__dirname,'views','index.html');
   //res.sendFile(htmlFilePath);
   //New way
-  res.render("index");
-});
-
-router.get("/flight-search", function (req, res) {
-  //Load flight search data
-  const lastFlightSearchData = readNWritefunctions.getFlightSearchData();
-  console.log(lastFlightSearchData);
-  const origin = lastFlightSearchData.origin;
-  const destination = lastFlightSearchData.destination;
-  const departDate = lastFlightSearchData["depart-date"];
-  const returnDate = lastFlightSearchData["return-date"];
-  res.render("flight-search", {
-    origin: origin,
-    destination: destination,
-    departDate: departDate,
-    returnDate: returnDate,
-  });
+  const [cities] = await db.query("SELECT id, city FROM airports");
+  //console.log([cities]);
+  res.render("index", { cities: cities });
 });
 
 router.get("/pax-info", function (req, res) {
@@ -48,8 +34,12 @@ router.get("/destinations", function (req, res) {
   res.render("destinations");
 });
 
+router.get("/unavailability", function (req, res) {
+  res.render("unavailability");
+});
+
 //Set up POST routes for processing form submissions
-router.post("/submit-flight-data-information", function (req, res) {
+router.post("/submit-flight-data-information", async function (req, res) {
   //Definition of variables submitted in the form
   const typeOfTrip = req.body["type-of-trip"];
   const origin = req.body.origin;
@@ -58,11 +48,81 @@ router.post("/submit-flight-data-information", function (req, res) {
   const returnDate = req.body["return-date"];
   const paxNumber = +req.body["pax-number"];
   //The data validation should come here
-  //Storing the information in a file
+  if (
+    (typeOfTrip == "round-trip" &&
+      returnDate >= departDate &&
+      paxNumber >= 1) ||
+    (typeOfTrip == "one-way" && paxNumber >= 1)
+  ) {
+    console.log("Data validated successfully");
+    console.log(typeOfTrip);
+    console.log(origin);
+    console.log(destination);
+    console.log(departDate);
+    console.log(returnDate);
+    console.log(paxNumber);
+    /*Old procedure: Storing the information in a file
   const flightSearchData = req.body;
-  readNWritefunctions.storeFlightSearchData(flightSearchData);
-  //Redirecting to the next page
-  res.redirect("/flight-search");
+  readNWritefunctions.storeFlightSearchData(flightSearchData);*/
+    //New procedure: creating a SQL query
+    const queryAvailableFlights = `
+  SELECT F.*, A1.city as originCity, A2.city as destinationCity,
+  TIME_FORMAT(TIMEDIFF(F.arrivalTime, F.departureTime), '%H:%i') as flightDuration
+  FROM flights F JOIN airports A1 ON F.originAirport = A1.id JOIN airports A2 ON F.destinationAirport = A2.id
+  WHERE
+  departureDate = ? AND
+  originAirport = ? AND
+  destinationAirport = ? AND
+  availableSeats - ?  >= 0
+  ORDER BY departureTime;`;
+    //Run query for outbound flights
+    const [outboundFlights] = await db.query(queryAvailableFlights, [
+      departDate,
+      origin,
+      destination,
+      paxNumber,
+    ]);
+    //console.log(outboundFlights.length);
+    if (typeOfTrip == "round-trip") {
+      //Run query for inbound flights
+      const [inboundFlights] = await db.query(queryAvailableFlights, [
+        returnDate,
+        destination,
+        origin,
+        paxNumber,
+      ]);
+      //console.log([inboundFlights]);
+      //If there is >=1 flight each way, redirect to the next page. Else, show an unavailability page
+      if (outboundFlights.length >= 1 && inboundFlights.length >= 1) {
+        res.render("flight-search", {
+          typeOfTrip: typeOfTrip,
+          origin: origin,
+          destination: destination,
+          departDate: departDate,
+          returnDate: returnDate,
+          outboundFlights: outboundFlights,
+          inboundFlights: inboundFlights,
+        });
+      } else {
+        res.redirect("/unavailability");
+      }
+    } else {
+      if (outboundFlights.length >= 1) {
+        res.render("flight-search", {
+          typeOfTrip: typeOfTrip,
+          origin: origin,
+          destination: destination,
+          departDate: departDate,
+          returnDate: returnDate,
+          outboundFlights: outboundFlights,
+        });
+      } else {
+        res.redirect("/unavailability");
+      }
+    }
+  } else {
+    res.status("500").render("500");
+  }
 });
 
 router.post("/submit-pax-data-for-reservation", function (req, res) {
@@ -85,7 +145,7 @@ router.post("/submit-pax-data-for-reservation", function (req, res) {
 router.post("/find-existing-booking", async function (req, res) {
   //Definition of variables submitted in the form
   const reservationCode = +req.body["reservation-code"];
-  console.log(reservationCode);
+  //console.log(reservationCode);
   /*Old way
     //Storing the information in a file
     const submittedReservationCode = req.body;
@@ -111,14 +171,13 @@ router.post("/find-existing-booking", async function (req, res) {
         LEFT JOIN airports a3 on a3.id = FI.originAirport
         LEFT JOIN airports a4 on a4.id = FI.destinationAirport
         WHERE R.reservationCode = ? ;`;
-    const [reservationData] = await db.query(query,[reservationCode]);
-    console.log([reservationData]);
+    const [reservationData] = await db.query(query, [reservationCode]);
+    //console.log([reservationData]);
     //Render the review-booking page
-    res.render("review-booking",{reservationData:reservationData[0]});
+    res.render("review-booking", { reservationData: reservationData[0] });
   } else {
     //res.status('500').render('500')
   }
-
 });
 
 module.exports = router;

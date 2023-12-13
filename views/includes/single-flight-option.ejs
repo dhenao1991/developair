@@ -4,18 +4,18 @@
             <p>Direct flight</p>
         </li>
         <span style="margin:0 0.5rem"> • </span>
-        <li>DA 1200</li>
+        <li>DA <%= flightNumber %></li>
     </ul>
     <section class="flight-relevant-details">
 
         <div class="station-information">
-            <p class="dep-or-arr-time">06:00 am</p>
-            <p class="dep-or-arr-station">MDE</p>
+            <p class="dep-or-arr-time"><%= departureTime %></p>
+            <p class="dep-or-arr-station"><%= originCity %> (<%= originAirport %>)</p>
         </div>
-        <p style="margin:auto 0">Duration: 01hr 00mm</p>
+        <p style="margin:auto 0">Duration: <%= flightDuration %></p>
         <div class="station-information">
-            <p class="dep-or-arr-time">07:00 am</p>
-            <p class="dep-or-arr-station">BOG</p>
+            <p class="dep-or-arr-time"><%= arrivalTime %></p>
+            <p class="dep-or-arr-station"><%= destinationCity %> (<%= destinationAirport %>)</p>
         </div>
     </section>
     <div class="select-flight">

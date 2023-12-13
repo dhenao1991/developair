@@ -82,6 +82,10 @@ h3 {
     padding: 0.25rem 0.25rem;
 }
 
+#inbound-options {
+    display: block;
+}
+
 /*Media queries here for responsive design*/
 
 @media(max-width: 768px){  

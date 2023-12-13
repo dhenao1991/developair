@@ -12,15 +12,39 @@
     <%- include('includes/side-drawer')%>    
     <h2>Here's what we got for you!</h2>
     <br>
-    <h3>These are the flights we have between <strong><%= origin %></strong> and <strong><%= destination%></strong> on <strong><%= departDate%></strong>.</h3>
-    <%- include('includes/single-flight-option') %>
-    <%- include('includes/single-flight-option') %>
+    <div id="outbound-options">
+        <h3>These are the flights we have between <strong><%= outboundFlights[0].originCity %> (<%= origin %>)</strong> and <strong><%= outboundFlights[0].destinationCity %> (<%= destination %>)</strong> on <strong><%= departDate%></strong>.</h3>
+        <% for (outboundFlight of outboundFlights) { %>
+            <%- include('includes/single-flight-option',{
+                flightNumber:outboundFlight.flightNumber,
+                departureTime: outboundFlight.departureTime,
+                originCity: outboundFlight.originCity,
+                originAirport: outboundFlight.originAirport,
+                arrivalTime: outboundFlight.arrivalTime,
+                destinationCity: outboundFlight.destinationCity,
+                destinationAirport:outboundFlight.destinationAirport,
+                flightDuration: outboundFlight.flightDuration
+            }) %>
+        <% } %>
+    </div>
     <% if(returnDate != "") {%>
-        <h3>These are the flights we have between <strong><%= destination %></strong> and <strong><%= origin%></strong> on <strong><%= returnDate%></strong>.</h3>
-        <%- include('includes/single-flight-option') %>
-        <%- include('includes/single-flight-option') %>
+        <div id="inbound-options">
+            <h3>These are the flights we have between <strong><%= inboundFlights[0].originCity %> (<%= destination %>)</strong> and <strong><%= inboundFlights[0].originCity %> (<%= origin %>)</strong> on <strong><%= returnDate%></strong>.</h3>
+            <% for (inboundFlight of inboundFlights) { %>
+                <%- include('includes/single-flight-option',{
+                flightNumber:inboundFlight.flightNumber,
+                departureTime: inboundFlight.departureTime,
+                originCity: inboundFlight.originCity,
+                originAirport: inboundFlight.originAirport,
+                arrivalTime: inboundFlight.arrivalTime,
+                destinationCity: inboundFlight.destinationCity,
+                destinationAirport:inboundFlight.destinationAirport,
+                flightDuration: inboundFlight.flightDuration
+                }) %>
+            <% } %>
+        </div>
     <%}%>
-    <a href="/index" id="go-back-to-main-page">Go back to main page</a>
+    <a href="/" id="go-back-to-main-page">Go back to main page</a>
 </body>
 
 </html>
