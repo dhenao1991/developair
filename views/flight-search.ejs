@@ -29,7 +29,7 @@
     </div>
     <% if(returnDate != "") {%>
         <div id="inbound-options">
-            <h3>These are the flights we have between <strong><%= inboundFlights[0].originCity %> (<%= destination %>)</strong> and <strong><%= inboundFlights[0].originCity %> (<%= origin %>)</strong> on <strong><%= returnDate%></strong>.</h3>
+            <h3>These are the flights we have between <strong><%= inboundFlights[0].originCity %> (<%= destination %>)</strong> and <strong><%= inboundFlights[0].destinationCity %> (<%= origin %>)</strong> on <strong><%= returnDate%></strong>.</h3>
             <% for (inboundFlight of inboundFlights) { %>
                 <%- include('includes/single-flight-option',{
                 flightNumber:inboundFlight.flightNumber,

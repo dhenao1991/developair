@@ -1,6 +1,3 @@
-//Variable for the Submit Data Form
-let dataForFlightSearchForm = document.querySelector('form');
-
 //Variables for all input elements
 let roundTripElement = document.getElementById("round-trip");
 let oneWayElement = document.getElementById("one-way");
@@ -9,6 +6,33 @@ let destinationElement = document.getElementById("destination");
 let departDateElement = document.getElementById("depart-date");
 let returnDateElement = document.getElementById("return-date");
 let paxNumberElement = document.getElementById("pax-number");
+
+//Variable for the Submit Data Form
+let dataForFlightSearchForm = document.querySelector('form');
+
+async function getDestinationsForGivenOrigin(event){
+  const origin = originElement.value
+  const response = await fetch(`/updatedestinations/${origin}`);
+  //This is a HTTP request driven by JS
+  const destinations = await response.json();
+  //console.log(destinations);
+
+  destinationElement.selectedIndex = -1; //El -1 quita la selección
+  destinationElement.innerHTML = ''
+  const defaultOptionForDestination = document.createElement('option');
+  defaultOptionForDestination.disabled = true;
+  defaultOptionForDestination.selected = true;
+  defaultOptionForDestination.textContent = 'Select a destination';
+  destinationElement.appendChild(defaultOptionForDestination);
+  for (const destination of destinations){
+    let destinationValue = document.createElement('option');
+    destinationValue.value = destination.airport;
+    destinationValue.textContent = `
+    ${destination.city} - ${destination.airport}
+    `
+    destinationElement.appendChild(destinationValue)
+  }
+}
 
 function checkOriginAndDestination() {
   const origin = originElement.value;
@@ -100,6 +124,9 @@ document.addEventListener("DOMContentLoaded", setMinDepartureDateAsToday);
 //Event listeners for enabling/disabling the returnDte
 roundTripElement.addEventListener("change", hideReturnDateIfOneWay);
 oneWayElement.addEventListener("change", hideReturnDateIfOneWay);
+
+//Event listener for retrieving all destinations given an origin
+originElement.addEventListener("change", getDestinationsForGivenOrigin);
 
 //Event listeners for checking that origin and destination are different
 originElement.addEventListener("change", checkOriginAndDestination);
