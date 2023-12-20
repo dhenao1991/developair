@@ -18,12 +18,12 @@ h3 {
 }
 
 #flights {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .flight-information {
-    margin: 0.5rem 0.5rem;
+    margin: 0.5rem;
 }
 
 .departure-and-arrival-info {

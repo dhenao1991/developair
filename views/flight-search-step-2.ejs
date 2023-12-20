@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('includes/head-config') %>
+    <link rel="stylesheet" href="/styles/flight-search.css">
+    <title>Flight search</title>
+</head>
+
+<body>
+    <%- include('includes/nav-bar')%>
+    <%- include('includes/side-drawer')%>    
+    <h2>Here's what we got for you!</h2>   
+    <br>
+    <h3>These are the flights we have between <strong><%= inboundFlights[0].originCity %> (<%= origin %>)</strong> and <strong><%= inboundFlights[0].destinationCity %> (<%= destination %>)</strong> on <strong><%= returnDateFormatted%></strong>.</h3>
+    <form action="pax-info" method="POST">
+    <% for (inboundFlight of inboundFlights) { %>
+        <%- include('includes/single-flight-option',{
+            flightNumber:inboundFlight.flightNumber,
+            departureTime: inboundFlight.departureTime,
+            originCity: inboundFlight.originCity,
+            originAirport: inboundFlight.originAirport,
+            arrivalTime: inboundFlight.arrivalTime,
+            destinationCity: inboundFlight.destinationCity,
+            destinationAirport:inboundFlight.destinationAirport,
+            flightDuration: inboundFlight.flightDuration
+        }) %>
+    <% } %>
+    <input type="hidden" name="selectedOutboundFlight" value="<%= selectedOutboundFlight%>">
+    <input type="hidden" name="departDate" value="<%= departDate%>">
+    <input type="hidden" name="returnDate" value="<%= returnDate%>">
+    <input type="hidden" name="paxNumber" value="<%= paxNumber%>">
+    <input type="hidden" name="typeOfTrip" value="round-trip">
+    <div id="final-section">
+        <button type="submit" class="final-button">Go to passenger data</button>
+        <a href="/" class="final-button">Go back to main page</a>
+        </div>
+        </form>
+
+
+</body>
+
+</html>

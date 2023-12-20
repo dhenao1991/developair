@@ -74,16 +74,20 @@ h3 {
     color: var(--color-white);
 }
 
-#go-back-to-main-page {
+.final-button {
+    font-family: 'Raleway', sans-serif;
+    font-size: var(--font-size-small);
     background-color: var(--color-dark-grey);
     color: var(--color-white);
     border-radius: 8px;
     margin: 0.5rem 0.2rem;
-    padding: 0.25rem 0.25rem;
+    padding: 0.5rem 0.25rem;
 }
 
-#inbound-options {
-    display: block;
+.final-button:hover {
+    background-color: var(--color-dark-blue);
+    font-weight: bold;
+    color: var(--color-white);
 }
 
 /*Media queries here for responsive design*/

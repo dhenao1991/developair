@@ -19,6 +19,7 @@
         </div>
     </section>
     <div class="select-flight">
-        <a href="/pax-info" class="select-flight-pseudo-button">Select this flight</a>
+        <input type="radio" name="selectedFlight" id="flightRadio-<%= flightNumber%>" value="<%= flightNumber%>" required>
+        <label for="flightRadio-<%= flightNumber%>" class="select-flight-pseudo-button">Select this flight</label>
     </div>
 </div>

@@ -18,28 +18,44 @@
             <section class="flight-information">
                 <strong>Outbound flight:</strong>
                 <div class="date-and-flight-number">
-                    <p>Departing Date: Wednesday, July 4, 2023</p>
-                    <p>Flight number: DA 1200</p>
+                    <p>Departing Date: <%= departDate %></p>
+                    <p>Flight number: DA <%= outboundFlightNumber %></p>
                 </div>
-                <%-include('includes/selected-flight-details')  %>
+                <%-include('includes/selected-flight-details',{
+                    origin:outboundOrigin,
+                    originCity:outboundOriginCity,
+                    destination:outboundDestination,
+                    destinationCity:outboundDestinationCity,
+                    departureTime:outboundDepartureTime,
+                    arrivalTime:outboundArrivalTime
+                })  %>
             </section>
+            <%if (typeOfTrip == 'round-trip') { %>
             <section class="flight-information">
                 <strong>Inbound flight:</strong>
                 <div class="date-and-flight-number">
-                    <p>Returning Date: Thursday, July 12, 2023</p>
-                    <p>Flight number: DA 1207</p>
+                    <p>Returning Date: <%= returnDate %></p>
+                    <p>Flight number: DA <%= inboundFlightNumber %></p>
                 </div>
-                <%-include('includes/selected-flight-details')  %>
+                <%-include('includes/selected-flight-details',{
+                    origin:inboundOrigin,
+                    originCity:inboundOriginCity,
+                    destination:inboundDestination,
+                    destinationCity:inboundDestinationCity,
+                    departureTime:inboundDepartureTime,
+                    arrivalTime:inboundArrivalTime
+                })  %>
             </section>
+            <% } %>
         </section>
         <div id="change-selected-itinerary">
-            <a href="/flight-search">Change the selected itinerary
+            <a href="/">Change the selected itinerary
             </a>
         </div>
     </section>
     <h3>Now let's make sure that your seats are stored under your name:</h3>
     <form action="/submit-pax-data-for-reservation" method="POST" id="pax-contact-data">
-        <h4>Passenger 1</h4>
+        <h4>Reservation holder</h4>
         <div class="individual-pax-info">
             <label for="pax-name">Name</label>
             <input type="text" name="pax-name" id="pax-name" required>
@@ -54,6 +70,16 @@
             <label for="pax-country">Country of residence</label>
             <input type="text" name="pax-country" id="pax-country" required>
             <label for="pax-credit-card-info">Credit card number and information (later)</label>
+        </div>
+        <div class="itinerary-details">
+            <input type="hidden" name="typeOfTrip" value="<%= typeOfTrip%>"> 
+            <input type="hidden" name="outboundFlightNumber" value="<%= outboundFlightNumber%>"> 
+            <input type="hidden" name="departDate" value="<%= departDate%>"> 
+            <input type="hidden" name="paxNumber" value="<%= paxNumber%>"> 
+            <% if (typeOfTrip == 'round-trip') { %>
+                <input type="hidden" name="inboundFlightNumber" value="<%= inboundFlightNumber%>"> 
+                <input type="hidden" name="returnDate" value="<%= returnDate%>"> 
+            <% } %>
         </div>
         <button type="submit" id="submit-pax-data">Purchase ticket</button>
         <button type="reset">Clear data</button>
