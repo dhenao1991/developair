@@ -18,7 +18,12 @@ const app = express();
 const path = require('path'); //path --> for creating paths for files
 
 //Require the routes
-const routes = require('./routes/routes');
+const ajaxRoutes = require('./routes/ajax');
+const createReservationRoutes = require('./routes/create-reservation');
+const findReservationRoutes = require('./routes/find-reservation');
+const loadPagesRoutes = require('./routes/load-pages');
+const paxInfoRoutes = require('./routes/pax-info');
+const searchFlightsRoutes = require('./routes/search-flights');
 
 //Serve all static files
 app.use(express.static('public'));
@@ -31,7 +36,14 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
 
 //Use the routes
-app.use('/', routes); //every request that starts with / is handled by routes
+app.use('/', ajaxRoutes);
+app.use('/', createReservationRoutes);
+app.use('/', findReservationRoutes);
+app.use('/', loadPagesRoutes);
+app.use('/', paxInfoRoutes);
+app.use('/', searchFlightsRoutes);
+
+//every request that starts with / is handled by the routes
 //The '/' is a filter for initial characters of routes 
 
 //Here we will add a middleware for the 404 status
