@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../data/database");
+const dateMgmt = require('../util/date-format-mgmt');
 
 //Set up POST routes for processing form submissions
 
@@ -75,8 +76,8 @@ router.post('/pax-info', async function(req,res){
   if (typeOfTrip == 'round-trip'){
   res.render('pax-info',{
     typeOfTrip:typeOfTrip,
-    departDate:departDate,
-    returnDate:returnDate,
+    departDate:dateMgmt.formatDate(departDate),
+    returnDate:dateMgmt.formatDate(returnDate),
     outboundFlightNumber:outboundFlightNumber,
     outboundOrigin:outboundOrigin,
     outboundOriginCity:outboundOriginCity,
@@ -96,7 +97,7 @@ router.post('/pax-info', async function(req,res){
 } else {
   res.render('pax-info',{
     typeOfTrip:typeOfTrip,
-    departDate:departDate,
+    departDate:dateMgmt.formatDate(departDate),
     returnDate:returnDate,
     outboundFlightNumber:outboundFlightNumber,
     outboundOrigin:outboundOrigin,

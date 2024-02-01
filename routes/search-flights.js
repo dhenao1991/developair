@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../data/database");
+const dateMgmt = require('../util/date-format-mgmt');
 
 //Set up POST routes for processing form submissions
 
@@ -17,26 +18,7 @@ router.post("/submit-flight-data-information-outbound",
     const paxNumber = +req.body["pax-number"];
 
     //Convert departDate into readable format
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    let parts = departDate.split("-");
-    const departDateYear = +parts[0];
-    const departDateMonth = months[+parts[1] - 1];
-    const departDateDate = +parts[2];
-    const departDateFormatted =
-      departDateMonth + " " + departDateDate + ", " + departDateYear;
+    const departDateFormatted = dateMgmt.formatDate(departDate);
 
     //The data validation should come here
     if (
@@ -108,27 +90,7 @@ router.post("/submit-flight-data-information-inbound",
     const selectedOutboundFlight = +req.body.selectedFlight;
 
     //Convert returnDate into readable format
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    parts = returnDate.split("-");
-    const returnDateYear = +parts[0];
-    const returnDateMonth = months[+parts[1] - 1];
-    const returnDateDate = +parts[2];
-    const returnDateFormatted =
-      returnDateMonth + " " + returnDateDate + ", " + returnDateYear;
+    const returnDateFormatted = dateMgmt.formatDate(returnDate);
 
     //The data validation should come here
     if (returnDate >= departDate && paxNumber >= 1) {
