@@ -18,7 +18,7 @@
             <section class="flight-information">
                 <strong>Outbound flight:</strong>
                 <div class="date-and-flight-number">
-                    <p>Departing Date: <%= departDate %></p>
+                    <p>Departing Date: <%= formattedDepartDate %></p>
                     <p>Flight number: DA <%= outboundFlightNumber %></p>
                 </div>
                 <%-include('includes/selected-flight-details',{
@@ -34,7 +34,7 @@
             <section class="flight-information">
                 <strong>Inbound flight:</strong>
                 <div class="date-and-flight-number">
-                    <p>Returning Date: <%= returnDate %></p>
+                    <p>Returning Date: <%= formattedReturnDate %></p>
                     <p>Flight number: DA <%= inboundFlightNumber %></p>
                 </div>
                 <%-include('includes/selected-flight-details',{

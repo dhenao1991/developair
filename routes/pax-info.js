@@ -76,8 +76,10 @@ router.post('/pax-info', async function(req,res){
   if (typeOfTrip == 'round-trip'){
   res.render('pax-info',{
     typeOfTrip:typeOfTrip,
-    departDate:dateMgmt.formatDate(departDate),
-    returnDate:dateMgmt.formatDate(returnDate),
+    departDate:departDate,
+    formattedDepartDate:dateMgmt.formatDate(departDate),
+    returnDate:returnDate,
+    formattedReturnDate:dateMgmt.formatDate(returnDate),
     outboundFlightNumber:outboundFlightNumber,
     outboundOrigin:outboundOrigin,
     outboundOriginCity:outboundOriginCity,
@@ -97,7 +99,8 @@ router.post('/pax-info', async function(req,res){
 } else {
   res.render('pax-info',{
     typeOfTrip:typeOfTrip,
-    departDate:dateMgmt.formatDate(departDate),
+    departDate:departDate,
+    formattedDepartDate:dateMgmt.formatDate(departDate),
     returnDate:returnDate,
     outboundFlightNumber:outboundFlightNumber,
     outboundOrigin:outboundOrigin,
