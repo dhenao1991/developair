@@ -1,10 +1,11 @@
 const db = require("../data/database");
+const dateMgmt = require("../util/date-format-mgmt");
 
-class ExistingReservation{
-    constructor(reservationCode){
-        this.reservationCode = reservationCode
-    }
-async getData(){
+class ExistingReservation {
+  constructor(reservationCode) {
+    this.reservationCode = reservationCode;
+  }
+  async getData() {
     //Create query for retrieving reservationData
     const query = `
         SELECT
@@ -23,9 +24,23 @@ async getData(){
         LEFT JOIN airports a3 on a3.id = FI.originAirport
         LEFT JOIN airports a4 on a4.id = FI.destinationAirport
         WHERE R.reservationCode = ? ;`;
-        const [reservationData] = await db.query(query, [this.reservationCode]);
-        return [reservationData][0][0];
-}
+    const [result] = await db.query(query, [this.reservationCode]);
+    const reservationData = result[0];
+    //Apply the dateFormat function
+    reservationData["paxDateOfBirth"] = dateMgmt.formatDate(
+      reservationData["paxDateOfBirth"].toISOString().split("T")[0]
+    );
+    reservationData["outboundDepartureDate"] = dateMgmt.formatDate(
+      reservationData["outboundDepartureDate"].toISOString().split("T")[0]
+    );
+    if (reservationData["inboundDepartureDate"]) {
+      reservationData["inboundDepartureDate"] = dateMgmt.formatDate(
+        reservationData["inboundDepartureDate"].toISOString().split("T")[0]
+      );
+    }
+    //console.log(reservationData);
+    return reservationData;
+  }
 }
 
 module.exports = ExistingReservation;

@@ -49,27 +49,29 @@ router.post('/pax-info', async function(req,res){
   let inboundArrivalTime;  
 
   //Run query for outbound flight  
-  [outboundFlight] = await db.query(queryForFlightDetails,[selectedOutboundFlight,departDate]);
-  console.log(outboundFlight)
+  const [queryResultOutbound] = await db.query(queryForFlightDetails,[selectedOutboundFlight,departDate]);
+  const outboundFlight = queryResultOutbound[0];
+  //console.log(outboundFlight);
   outboundFlightNumber = selectedOutboundFlight;
-  outboundOrigin = outboundFlight[0].originAirport;
-  outboundDestination = outboundFlight[0].destinationAirport;
-  outboundDestinationCity = outboundFlight[0].destinationCity;
-  outboundOriginCity = outboundFlight[0].originCity;
-  outboundDepartureTime = outboundFlight[0].departureTime;
-  outboundArrivalTime = outboundFlight[0].arrivalTime;
+  outboundOrigin = outboundFlight.originAirport;
+  outboundDestination = outboundFlight.destinationAirport;
+  outboundDestinationCity = outboundFlight.destinationCity;
+  outboundOriginCity = outboundFlight.originCity;
+  outboundDepartureTime = outboundFlight.departureTime;
+  outboundArrivalTime = outboundFlight.arrivalTime;
 
   //If applicable, run query for inbound flight
   if (typeOfTrip == 'round-trip'){
-    [inboundFlight] = await db.query(queryForFlightDetails,[selectedInboundFlight,returnDate]);
-    console.log(inboundFlight)
+    const [queryResultInbound] = await db.query(queryForFlightDetails,[selectedInboundFlight,returnDate]);
+    const inboundFlight = queryResultInbound[0];
+    //console.log(inboundFlight)
     inboundFlightNumber = selectedInboundFlight;
-    inboundOrigin = inboundFlight[0].originAirport;
-    inboundDestination = inboundFlight[0].destinationAirport;
-    inboundDestinationCity = inboundFlight[0].destinationCity;
-    inboundOriginCity = inboundFlight[0].originCity;
-    inboundDepartureTime = inboundFlight[0].departureTime;
-    inboundArrivalTime = inboundFlight[0].arrivalTime;
+    inboundOrigin = inboundFlight.originAirport;
+    inboundDestination = inboundFlight.destinationAirport;
+    inboundDestinationCity = inboundFlight.destinationCity;
+    inboundOriginCity = inboundFlight.originCity;
+    inboundDepartureTime = inboundFlight.departureTime;
+    inboundArrivalTime = inboundFlight.arrivalTime;
   }
 
   //Render the pax-info page according to the type of trip

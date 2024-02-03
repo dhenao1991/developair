@@ -28,12 +28,7 @@ router.post("/submit-flight-data-information-outbound",
       (typeOfTrip == "one-way" && paxNumber >= 1)
     ) {
       console.log("Data validated successfully");
-      console.log(typeOfTrip);
-      console.log(origin);
-      console.log(destination);
-      console.log(departDate);
-      console.log(returnDate);
-      console.log(paxNumber);
+      console.log(typeOfTrip,origin,destination,departDate,returnDate,paxNumber);
       //Create a SQL query
       const queryAvailableFlights = `
       SELECT F.flightNumber, F.departureDate, F.originAirport, F.destinationAirport,
@@ -55,7 +50,6 @@ router.post("/submit-flight-data-information-outbound",
         destination,
         paxNumber,
       ]);
-      //console.log(outboundFlights);
       //If there is >=1 flight, redirect to the next page. Else, show an unavailability page
       if (outboundFlights.length >= 1) {
         res.render("flight-search-step-1", {
@@ -81,7 +75,6 @@ router.post("/submit-flight-data-information-outbound",
 router.post("/submit-flight-data-information-inbound",
   async function (req, res) {
     //Definition of variables submitted in the form
-
     const outboundOrigin = req.body.originCity;
     const outboundDestination = req.body.destinationCity;
     const departDate = req.body.departDate;
@@ -95,14 +88,7 @@ router.post("/submit-flight-data-information-inbound",
     //The data validation should come here
     if (returnDate >= departDate && paxNumber >= 1) {
       console.log("Data validated successfully");
-
-      console.log(outboundOrigin);
-      console.log(outboundDestination);
-      console.log(departDate);
-      console.log(returnDate);
-      console.log(paxNumber);
-      console.log(selectedOutboundFlight);
-
+      console.log(outboundOrigin,outboundDestination,departDate,returnDate,paxNumber,selectedOutboundFlight);      //Create a SQL query
       //Create a SQL query
       const queryAvailableFlightsWithoutConstraints = `
       SELECT F.flightNumber, F.departureDate, F.originAirport, F.destinationAirport,
@@ -118,6 +104,7 @@ router.post("/submit-flight-data-information-inbound",
       availableSeats - ?  >= 0
       ORDER BY departureTime;`;
 
+      //Create a SQL query
       const queryAvailableFlightsWithConstraints = `
 	    SELECT F.flightNumber, F.departureDate, F.originAirport, F.destinationAirport,
 	    time_format(F.departureTime,'%H:%i') as departureTime,

@@ -97,7 +97,9 @@ class NewReservation {
       this.outboundDepartureDate,
       this.outboundFlightNumber,
     ]);
-    return [result][0][0].reservationCode;
+    const reservationCode = result[0].reservationCode;
+    //console.log(reservationCode)
+    return reservationCode;
 
   }
 }
