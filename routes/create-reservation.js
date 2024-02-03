@@ -1,12 +1,12 @@
 //Set up the server
 const express = require("express");
 const router = express.Router();
-const db = require("../data/database");
+const NewReservation = require("../models/new-reservation-model");
 
 //Set up POST routes for processing form submissions
 
 //Create reservation
-router.post("/submit-pax-data-for-reservation", async function (req, res) {  
+router.post("/submit-pax-data-for-reservation", async function (req, res) {
   //Definition of variables submitted in the form
   const paxName = req.body["pax-name"];
   const paxLastName = req.body["pax-last-name"];
@@ -21,50 +21,15 @@ router.post("/submit-pax-data-for-reservation", async function (req, res) {
   const paxNumber = +req.body.paxNumber;
   let inboundFlightNumber;
   let returnDate;
-  if (typeOfTrip == 'round-trip'){
+  if (typeOfTrip == "round-trip") {
     inboundFlightNumber = +req.body.inboundFlightNumber;
     returnDate = req.body.returnDate;
   }
-  //Create queries to INSERT a record in the database
-  const queryInsertRecordforRoundTrip = `
-  INSERT INTO reservations (paxName, paxLastName, paxDateOfBirth, paxEmail, paxPhone, paxCountry, reservedSeats, outboundFlightNumber, outboundDepartureDate, inboundFlightNumber, inboundDepartureDate, creationDate)
-  VALUES (?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)`;
 
-  const queryInsertRecordforOneWay = `
-  INSERT INTO reservations (paxName, paxLastName, paxDateOfBirth, paxEmail, paxPhone, paxCountry, reservedSeats, outboundFlightNumber, outboundDepartureDate, creationDate)
-  VALUES (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)`;
-
-  //Create query to UPDATE the available seats of the selected flights
-  const queryUpdateAvailableSeats = `
-  UPDATE flights SET availableSeats = availableSeats - ? WHERE flightNumber = ? AND departureDate = ?`;
-
-  //Run INSERT and UPDATE queries for roundtrip
-  if(typeOfTrip == 'round-trip'){
-  await db.query(queryInsertRecordforRoundTrip,[
-    paxName,
-    paxLastName,
-    paxDateOfBirth,
-    paxEmail,
-    paxPhoneNumber,
-    paxCountry,
-    paxNumber,
-    outboundFlightNumber,
-    departDate,
-    inboundFlightNumber,
-    returnDate]);
-  await db.query(queryUpdateAvailableSeats,[
-    paxNumber,
-    outboundFlightNumber,
-    departDate
-  ]);
-  await db.query(queryUpdateAvailableSeats,[
-    paxNumber,
-    inboundFlightNumber,
-    returnDate
-  ]);
-  } else {
-    //Run INSERT and UPDATE queries for one-way
-    await db.query(queryInsertRecordforOneWay,[
+  let newReservation;
+  if (typeOfTrip == "round-trip") {
+    //Create blueprint of newReservation and run the createRoundTrip method
+    newReservation = new NewReservation(
       paxName,
       paxLastName,
       paxDateOfBirth,
@@ -73,25 +38,34 @@ router.post("/submit-pax-data-for-reservation", async function (req, res) {
       paxCountry,
       paxNumber,
       outboundFlightNumber,
-      departDate
-    ]);
-    await db.query(queryUpdateAvailableSeats,[
+      departDate,
+      inboundFlightNumber,
+      returnDate
+    );
+    await newReservation.createRoundTrip();
+    
+  } else {
+    //Create blueprint of newReservation and run the createOneWayTrip method
+    newReservation = new NewReservation(
+      paxName,
+      paxLastName,
+      paxDateOfBirth,
+      paxEmail,
+      paxPhoneNumber,
+      paxCountry,
       paxNumber,
       outboundFlightNumber,
-      departDate
-    ]);
+      departDate,
+    );
+    await newReservation.createOneWayTrip();    
   }
 
-  //Creare query to SELECT the reservationCode of the created record
-  const querySelectReservationCode = `
-  SELECT reservationCode FROM reservations WHERE paxEmail = ? AND outboundDepartureDate = ? AND outboundFlightNumber = ?`;
-
-  //Run query
-  const [reservationCode] = await db.query(querySelectReservationCode,[paxEmail,departDate,outboundFlightNumber]);
+  //Get reservation code of the newly created reservation
+  const reservationCode = await newReservation.getReservationCode();
 
   //Redirecting to the next page
-  res.render("successful-purchase",{
-    reservationCode:reservationCode[0].reservationCode
+  res.render("successful-purchase", {
+    reservationCode: reservationCode,
   });
 });
 
