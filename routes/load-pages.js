@@ -1,22 +1,14 @@
 //Set up the server
 const express = require("express");
 const router = express.Router();
-const db = require("../data/database");
+const loadPagesControllers = require('../controllers/load-pages-controllers');
 
 //Set up the GET routes for loading each page
 
-router.get("/", async function (req, res) {
-  const [cities] = await db.query("SELECT id, city FROM airports");
-  //console.log([cities]);
-  res.render("index", { cities: cities });
-});
+router.get("/", loadPagesControllers.loadIndex);
 
-router.get("/find-booking-form", function (req, res) {
-  res.render("find-booking-form");
-});
+router.get("/find-booking-form", loadPagesControllers.loadFindReservationPage);
 
-router.get("/destinations", function (req, res) {
-  res.render("destinations");
-});
+router.get("/destinations", loadPagesControllers.loadDestinationsPage);
 
 module.exports = router;
