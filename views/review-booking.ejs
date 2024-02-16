@@ -13,22 +13,23 @@
     <div id="pax-greeting">
         <h2>Hello, <strong id="booked-pax-name"><%= reservationData.paxName %></strong></h2>
         <h3>Here's the itinerary you have booked with us under the confirmation code <span
-                id="booked-confirmation-code"><%= reservationData.reservationCode %></span></h3>
+                id="booked-confirmation-code"><strong><%= reservationData.reservationCode %></strong></span></h3>
     </div>
     <h3 class="section-title">Passenger data</h3>
     <div id="booked-passenger-data">
-        <p>Passenger name: <%= reservationData.paxName %></p>
-        <p>Passenger last name: <%= reservationData.paxLastName %></p>
-        <p>Passenger date of birth: <%= reservationData.paxDateOfBirth %></p>
-        <p>Passenger email address: <%= reservationData.paxEmail %></p>
-        <p>Passenger phone number: <%= reservationData.paxPhone %></p>
-        <p>Passenger country of residence: <%= reservationData.paxCountry %></p>
-        <p>Number of seats booked: <%= reservationData.reservedSeats %></p>
+        <p>Passenger name: <strong><%= reservationData.paxName %></strong></p>
+        <p>Passenger last name: <strong><%= reservationData.paxLastName %></strong></p>
+        <p>Passenger date of birth: <strong><%= reservationData.paxDateOfBirth %></strong></p>
+        <p>Passenger email address: <strong><%= reservationData.paxEmail %></strong></p>
+        <p>Passenger phone number: <strong><%= reservationData.paxPhone %></strong></p>
+        <p>Passenger country of residence: <strong><%= reservationData.paxCountry %></strong></p>
+        <p>Number of seats booked: <strong><%= reservationData.reservedSeats %></strong></p>
+        <p>Amount paid: <strong>$0</strong></p>
     </div>
     <h3 class="section-title">Your itinerary</h3>
     <section id="booked-itinerary">
         <section class="booked-flight-information">
-            <strong>Outbound flight:</strong>
+            <span class="type-of-flight">Outbound flight:</span>
             <%-include('includes/reserved-flight-details',{
                 departureDate:reservationData.outboundDepartureDate,
                 flightNumber:reservationData.outboundFlightNumber,
@@ -45,7 +46,7 @@
 
         <% if(reservationData.inboundOrigin != null) { %>
         <section class="booked-flight-information">
-            <strong>Inbound flight:</strong>
+            <span class="type-of-flight">Inbound flight:</span>
             <%-include('includes/reserved-flight-details',{
                 departureDate:reservationData.inboundDepartureDate,
                 flightNumber:reservationData.inboundFlightNumber,
@@ -61,7 +62,7 @@
         </section>
         <% } %>
     </section>
-    <p style="text-align:left; margin-left:1rem; margin-bottom:0.75rem">If you wish to make changes to your itinerary, please call us at our contact center.</p>
+    <p id="farewell">If you wish to make changes to your itinerary, please call us at our contact center.</p>
 </body>
 
 </html>

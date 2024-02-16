@@ -1,27 +1,32 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 0;
+}
+
 h2 {
         margin-top:2.5rem ;
+        font-size: var(--font-size-medium);
     }
 
 #successful-purchase-box{
-    max-width: 80%;
+    width: 50%;
     margin: 1.5rem auto;
     background-color: var(--color-white);
     border-radius: 12px;
 }
 
-#successful-purchase-box h3{
-    font-size: var(--font-size-small);
+#successful-purchase-box p{
+    font-size: var(--font-size-medium);
     margin: 0.5rem auto;
     display: inline-block;
 }
 
-#successful-purchase-box p {
-    margin: 0.5rem auto;
-}
-
 #confirmation-code {
     color:var(--color-dark-blue);
-    font-size: var(--font-size-medium);
     font-weight: bold;
     margin: 0.5rem auto;
 }
@@ -33,6 +38,8 @@ h2 {
     border-radius: 6px;
     background-color: var(--color-green);
     color: var(--color-white);
+    font-size: var(--font-size-medium);
+
 }
 
 #successful-purchase-box a:hover {

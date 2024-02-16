@@ -1,16 +1,22 @@
 #pax-greeting {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
     text-align: left;
     margin-bottom: 1rem;
 }
 
 #pax-greeting h2 {
     margin-left: 1rem;
+    font-size: var(--font-size-large);
+}
+
+#pax-greeting h2 #booked-pax-name {
+    color: var(--color-dark-blue);
 }
 
 #pax-greeting h3 {
     margin-left: 1rem;
     margin-top: 0.5rem;
+    font-size: var(--font-size-small);
 }
 
 #pax-greeting #booked-confirmation-code {
@@ -23,6 +29,8 @@
 .section-title {
     text-align: left;
     margin-left: 1rem;
+    color:var(--color-green);
+    font-size: var(--font-size-medium);
     font-weight: bold;
 }
 
@@ -32,8 +40,16 @@
     text-align: center;
     background-color: var(--color-white);
     border-radius: 12px;
-    border: solid;
     border-color: var(--color-dark-grey);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: var(--font-size-small);
+}
+
+.type-of-flight {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: var(--color-dark-blue);
 }
 
 #booked-passenger-data p {
@@ -49,11 +65,17 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border:solid;
     border-color: var(--color-dark-grey);
     border-radius: 12px;
     padding: 1rem 0;
+    font-size: var(--font-size-small);
     
+}
+
+#farewell {
+    text-align:left;
+    margin: 1rem;
+    font-size: var(--font-size-small);
 }
 
 

@@ -55,7 +55,8 @@ async function getInformationForOutboundFlight(req, res) {
         paxNumber: paxNumber,
       });
     } else {
-      res.redirect("/unavailability");
+      console.log('There are no flights')
+      res.render("unavailability");
     }
   } else {
     res.status("500").render("500");

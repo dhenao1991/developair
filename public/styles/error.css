@@ -1,9 +1,19 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 0;
+}
+
 h2 {
     margin-top: 2.5rem;
+    font-size: var(--font-size-large);
 }
 
 #error-message{
-    max-width: 60%;
+    width: 50%;
     margin: 1.2rem auto;
     background-color: var(--color-white);
     border-radius: 12px;
@@ -13,7 +23,12 @@ h2 {
     display: inline-block;
     margin: 1rem auto;
     color: var(--color-dark-blue);
+    font-size: var(--font-size-medium);
 
+}
+
+#error-message h3 {
+    font-size: var(--font-size-small);
 }
 
 #error-message a {
@@ -23,6 +38,7 @@ h2 {
     border-radius: 6px;
     background-color: var(--color-green);
     color: var(--color-white);
+    font-size: var(--font-size-small);
 }
 
 #error-message a:hover {

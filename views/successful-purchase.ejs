@@ -13,12 +13,16 @@
     <h2>Yay! Your purchase was successful!</h2>
     <section id="successful-purchase-box">
         <p>Your confirmation code is:</p>
+        <br>
         <p id="confirmation-code"><%= reservationCode %></p>
+        <br>
         <p>You may choose what to do now:</p>
+        <br>
         <a href="/find-booking-form">View my reservation</a>
         <a href="/index">Go to the main page</a>
         <a href="/destinations">Explore our destinations</a>
     </section>
+    <%- include('includes/footer')%>
 </body>
 
 </html>

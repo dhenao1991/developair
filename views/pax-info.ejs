@@ -16,10 +16,10 @@
     <section id="itinerary">
         <section id="flights">
             <section class="flight-information">
-                <strong>Outbound flight:</strong>
+                <p class="type-of-flight">Outbound flight:</p>
                 <div class="date-and-flight-number">
-                    <p>Departing Date: <%= formattedDepartDate %></p>
-                    <p>Flight number: DA <%= outboundFlightNumber %></p>
+                    <p>Departing Date: <strong><%= formattedDepartDate %></strong></p>
+                    <p>Flight number: <strong>DA <%= outboundFlightNumber %></strong></p>
                 </div>
                 <%-include('includes/selected-flight-details',{
                     origin:outboundOrigin,
@@ -32,10 +32,10 @@
             </section>
             <%if (typeOfTrip == 'round-trip') { %>
             <section class="flight-information">
-                <strong>Inbound flight:</strong>
+                <p class="type-of-flight">Inbound flight:</p>
                 <div class="date-and-flight-number">
-                    <p>Returning Date: <%= formattedReturnDate %></p>
-                    <p>Flight number: DA <%= inboundFlightNumber %></p>
+                    <p>Returning Date: <strong><%= formattedReturnDate %></strong></p>
+                    <p>Flight number: <strong>DA <%= inboundFlightNumber %></strong></p>
                 </div>
                 <%-include('includes/selected-flight-details',{
                     origin:inboundOrigin,
@@ -85,7 +85,7 @@
         <button type="reset">Clear data</button>
     </form>
 
-
+    <%- include('includes/footer')%>
 </body>
 
 </html>
