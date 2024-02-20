@@ -1,3 +1,4 @@
+const stripe = require('stripe')('sk_test_51KLHBEAXmrX89PigEzVlrbdbjp2w0tGyxmfzWDenfQrqzfhTZ3cJauJrlEjcNILPV4VxSCSo5AetxdzjTDrO0aFe00GPST4KWO');
 const NewReservation = require("../models/new-reservation-model");
 
 async function submitPaxDataAndCreateReservation (req, res) {
@@ -56,10 +57,30 @@ async function submitPaxDataAndCreateReservation (req, res) {
   
     //Get reservation code of the newly created reservation
     const reservationCode = await newReservation.getReservationCode();
+
+    let encodedReservationCode = encodeURIComponent(reservationCode);
+
+    //Stripe
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data:{
+            currency: 'usd',
+            product_data:{
+              name:'Air ticket'
+            },
+            unit_amount_decimal:100
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: 'http://localhost:3000/successful-purchase?valid=' + encodedReservationCode,
+      cancel_url: 'http://localhost:3000/error',
+    });
   
-    //Redirecting to the successful purchase page
-    var encodedReservationCode = encodeURIComponent(reservationCode);
-    res.redirect('/successful-purchase?valid=' + encodedReservationCode)
+    res.redirect(303, session.url);
+
   };
 
   module.exports = {
