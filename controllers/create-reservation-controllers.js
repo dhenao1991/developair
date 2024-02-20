@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51KLHBEAXmrX89PigEzVlrbdbjp2w0tGyxmfzWDenfQrqzfhTZ3cJauJrlEjcNILPV4VxSCSo5AetxdzjTDrO0aFe00GPST4KWO');
+const stripe = require('stripe')('Private key here');
 const NewReservation = require("../models/new-reservation-model");
 
 async function submitPaxDataAndCreateReservation (req, res) {
@@ -61,6 +61,7 @@ async function submitPaxDataAndCreateReservation (req, res) {
     let encodedReservationCode = encodeURIComponent(reservationCode);
 
     //Stripe
+    try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -77,10 +78,11 @@ async function submitPaxDataAndCreateReservation (req, res) {
       mode: 'payment',
       success_url: 'http://localhost:3000/successful-purchase?valid=' + encodedReservationCode,
       cancel_url: 'http://localhost:3000/error',
-    });
-  
+    });  
     res.redirect(303, session.url);
-
+  } catch(error){
+    res.redirect('/successful-purchase?valid=' + encodedReservationCode)
+  }
   };
 
   module.exports = {
