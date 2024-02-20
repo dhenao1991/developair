@@ -57,10 +57,9 @@ async function submitPaxDataAndCreateReservation (req, res) {
     //Get reservation code of the newly created reservation
     const reservationCode = await newReservation.getReservationCode();
   
-    //Redirecting to the next page
-    res.render("successful-purchase", {
-      reservationCode: reservationCode,
-    });
+    //Redirecting to the successful purchase page
+    var encodedReservationCode = encodeURIComponent(reservationCode);
+    res.redirect('/successful-purchase?valid=' + encodedReservationCode)
   };
 
   module.exports = {

@@ -11,4 +11,8 @@ router.get("/find-booking-form", loadPagesControllers.loadFindReservationPage);
 
 router.get("/destinations", loadPagesControllers.loadDestinationsPage);
 
+router.get("/successful-purchase",loadPagesControllers.loadSuccessfulPurchasePage);
+
+router.get("/error",loadPagesControllers.loadErrorPage);
+
 module.exports = router;
